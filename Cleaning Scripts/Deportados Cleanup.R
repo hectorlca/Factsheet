@@ -4,8 +4,10 @@ library(lubridate)
 library(chron)
 library(tm)
 library(ggmap)
+library(xts)
+library(dygraphs)
+library (highcharter)
 
-#deportados <- read.csv("data/deportados.csv")
 
 deportados <- read.csv("data/deportados/deportados.csv", stringsAsFactors = FALSE)
 
@@ -309,21 +311,39 @@ write.csv(deportados, "data/deportados/depsclean.csv", row.names = FALSE)
 #### SUMMARIES ########
 #######################
 
+deportados <- read.csv("data/deportados/depsclean.csv")
+
 
 depsdaily <- 
   select(deportados, lastname, gender, issueddate)
 
 depsdaily$issuemonth <- month(dmy(depsdaily$issueddate))
+depsdaily$issueyear <- year(dmy(depsdaily$issueddate))
 
 depsdaily <- 
-  group_by(depsdaily, issuemonth) %>%
-  summarise( count = n())
+  group_by(depsdaily, issuemonth, issueyear) %>%
+  summarise( count = n()) %>%
+  na.omit
 
-depsdaily$issueddate <- dmy(depsdaily$issueddate)
-  
-  
+depsdaily$date <- paste0("1/", depsdaily$issuemonth, "/", depsdaily$issueyear)
 
+depsxts <- ungroup(depsdaily)
+depsxts <- select(depsdaily, date, count)
+depsxts$issuemonth <- NULL
+
+
+depsxts$date <- dmy(depsxts$date)
+
+rownames(depsxts) <- depsxts$date
+
+#### el Dygraph ###
+
+dygraph(depsxts)
   
+  
+##################################
+###### Cleanup Returnados#########
+##################################
 
 
 
