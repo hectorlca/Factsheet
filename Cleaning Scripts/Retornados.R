@@ -9,14 +9,21 @@ library(dygraphs)
 library( highcharter)
 retornados <- read.csv("data/deportados/retornados.csv")
 
+retornados <- as.data.frame(t(retornados))
+
 
 highchart(retornados)
 
 highchart() %>% 
-  hc_chart(type = "pie") %>% 
+  hc_chart(type = "bar") %>% 
   hc_title(text = "Adultos Retornados") %>% 
   hc_xAxis(categories = retornados$ano) %>% 
-  hc_add_series(data = retornados$usadult,
-                name = "Adultos Retornados") %>%
-  hc_add_series(data = retornados$usuac,
-                name = "UAC Retornados")
+  hc_add_series(data = retornados$ustotal,
+                name = "Adultos Retornados") 
+
+
+
+
+hchart(retornados, "column", hcaes(x = ano, y = ustotal))
+
+
