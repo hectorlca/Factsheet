@@ -36,5 +36,5 @@ highchart() %>%
   hc_add_series(data = as.numeric(uacfy$Honduras),
                 name = "Adultos Retornados") 
 
-highchart(uacfy)
+
 
