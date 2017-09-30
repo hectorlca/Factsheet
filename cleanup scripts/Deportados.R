@@ -353,16 +353,7 @@ rownames(depsxts) <- depsxts$date
 
 dygraph(depsxts)
   
-  
-##################################
-###### Cleanup Returnados#########
-##################################
 
-
-
-
-
-ejemplo de cambio hecho por roberto
 
 
 
