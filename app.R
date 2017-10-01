@@ -18,19 +18,7 @@ library(highcharter)
 
 #### Homicidios Anuales y Mensuales ####
 
-mensuales <- read.xlsx("data/factsheet.xlsx", 
-                       sheetIndex = 1)
 
-homicidios <- select(
-  mensuales, timeperiod, numhomicidios) %>%
-  na.omit()
-
-homicidios$timeperiod <- ymd(homicidios$timeperiod)
-rownames(homicidios) <- homicidios$timeperiod
-
-homicidios <- as.xts(homicidios)
-
-anuales <- read.csv("data/anuales.csv", stringsAsFactors = FALSE)
 
 #### User Interface ####
 
@@ -38,43 +26,12 @@ anuales <- read.csv("data/anuales.csv", stringsAsFactors = FALSE)
 
 
 ui <-
-  dashboardPage(
-    dashboardHeader(title = "Honduras Factsheet"),
-    
-    dashboardSidebar(
-      width = 200,
-      sidebarMenu(
-        #style = "position: fixed; overflow: hidden;",
-        menuItem(
-          "Security",
-          tabName = "security",
-          icon = icon("user-secret")
-        )
 
-        )
-      ),
+fluidPage(
+  fluidRow(
     
-    dashboardBody(
-      tabItems(
-        tabItem(
-          tabName = "security",
-          h3("Crime and Violence Statistics"),
-          fluidRow(
-            box(
-              width = 6,
-              #height = 800,
-              dygraphOutput("numhomicidios", height = 400)
-            ),
-            box (
-              width = 6,
-              plotlyOutput(
-                "tasahom", height = 400)
-              )
-            )
-          )
-        )
-      )
-    )
+  )
+)
   
   
  

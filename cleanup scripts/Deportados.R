@@ -342,13 +342,19 @@ depsdaily$date <- paste0("1/", depsdaily$issuemonth, "/", depsdaily$issueyear)
 
 depsxts <- ungroup(depsdaily)
 depsxts <- select(depsdaily, date, count)
-depsxts$issuemonth <- NULL
 
 
-depsxts$date <- dmy(depsxts$date)
 
-rownames(depsxts) <- depsxts$date
 
+depsxts$date2 <- mdy(depsxts$date)
+depsxts$date3 <- dmy(depsxts$date)
+
+
+write.csv(depsxts, "data/deportados/etd.csv", row.names = FALSE)
+
+###############################################################
+### AQUI TERMINA LA LIMPIEZA Y SE GUARDA EL ARCHIVO RESUMEN###
+##############################################################
 #### el Dygraph ###
 
 dygraph(depsxts)

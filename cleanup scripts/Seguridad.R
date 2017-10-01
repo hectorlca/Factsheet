@@ -18,4 +18,11 @@ rownames(homicidios) <- homicidios$mes
 
 homsxts <- as.xts(homicidios)
 
-dygraph(homsxts)
+dygraph(homsxts, main = "Homicides/Day") %>%
+  dySeries("homicidios", label = "Homicides") %>%
+  dyRangeSelector(height = 30) %>%
+  dyLegend(show = "always", hideOnMouseOut = FALSE, width = 350) %>%
+  dyAxis("x", drawGrid = FALSE) %>%
+  dyOptions(fillGraph = FALSE)
+  dyRangeSelector()
+  
