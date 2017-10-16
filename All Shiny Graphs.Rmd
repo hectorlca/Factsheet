@@ -17,7 +17,6 @@ library(dygraphs)
 library( highcharter)
 ```
 
-
 #2) Apprehensions
 
 ```{r}
@@ -135,7 +134,7 @@ highchart() %>% hc_add_theme(hc_theme_smpl())%>%
   
 ```
 
-# 5) Real GDP Growth
+#5) Real GDP Growth
 
 ```{r}
 
@@ -162,7 +161,7 @@ highchart() %>% hc_add_theme(hc_theme_smpl())%>%
              shared = TRUE)
 ```
 
-# 6) Remittances as a percentage of GDP
+#6) Remittances as a percentage of GDP
 
 ```{r}
 
@@ -189,7 +188,7 @@ highchart() %>% hc_add_theme(hc_theme_smpl())%>%
 
 ```
 
-# 7) 
+#7) 
 
 
 
