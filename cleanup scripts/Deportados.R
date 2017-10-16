@@ -320,9 +320,6 @@ deportados <- filter(deportados, status != "Archived")
 
 ### Check for duplicates ###
 
-duplicados <- 
-  group_by(deportados, anumber, passportnumber) %>%
-  summarise(veces = n())
 
 #########################
 
@@ -330,15 +327,23 @@ duplicados <-
 depsdaily <- 
   select(deportados, lastname, gender, issueddate)
 
-depsdaily$issuemonth <- month(dmy(depsdaily$issueddate))
-depsdaily$issueyear <- year(dmy(depsdaily$issueddate))
+write.csv (depsdaily, "data/limpia/depsdaily.csv", row.names = FALSE)
 
-depsdaily <- 
-  group_by(depsdaily, issuemonth, issueyear) %>%
+# HEre have to change formats in excel manually to mmm-yyyy
+
+depsdaily <- read.csv("data/limpia/depsdailywithmonth.csv", stringsAsFactors = FALSE)
+
+
+
+
+
+depsdailysum <- 
+  group_by(depsdaily, month) %>%
   summarise( count = n()) %>%
   na.omit
 
-depsdaily$date <- paste0("1/", depsdaily$issuemonth, "/", depsdaily$issueyear)
+write.csv(depsdailysum, "graficos/immigration/etdsmonthyl.csv", row.names = FALSE)
+#depsdaily$date <- paste0("1/", depsdaily$issuemonth, "/", depsdaily$issueyear)
 
 depsxts <- ungroup(depsdaily)
 depsxts <- select(depsdaily, date, count)

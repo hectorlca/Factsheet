@@ -1,0 +1,204 @@
+---
+title: "Shiny App Visualizations"
+author: "Hector Corrales"
+date: "October 14, 2017"
+output: html_document
+---
+#1) Load Libraries
+```{r, message=FALSE, warning=TRUE, include=FALSE}
+library(plyr)
+library(dplyr)
+library(lubridate)
+library(chron)
+library(tm)
+library(ggmap)
+library(xts)
+library(dygraphs)
+library( highcharter)
+```
+
+
+#2) Apprehensions
+
+```{r}
+
+aprehensiones <- read.csv("data/deportados/aprehensiones.csv", stringsAsFactors = FALSE)
+#aprehensiones$month <- mdy(aprehensiones$mes)
+
+highchart() %>% hc_add_theme(hc_theme_smpl())%>%
+  
+  hc_xAxis(categories = aprehensiones$month) %>% 
+  hc_add_series(data = aprehensiones$total,
+                name = "Total Apprehended") %>%
+  hc_add_series(data = aprehensiones$menores,
+                name = "Minors Apprehended") %>%
+  hc_chart(type = "line") %>% 
+  
+  hc_title(text = "Monthly Apprehensions at the Southwest Border",
+           style = list(color = "#2d323a", fontSize = "27px", 
+                        fontFamily = "Franklin Gothic Medium Cond", style = "bold")) %>%
+  hc_subtitle(text = "Source: CBP Biweekly report.", 
+              style = list(color = "#525c6b", fontSize = "17px", 
+                           fontFamily = "Times New Roman", style = "bold")) %>%
+  hc_tooltip(animation = TRUE,
+             followPointer = FALSE,
+             headerFormat = '<span style="font-size: 14px">{point.key}</span><br/>', 
+             shared = TRUE)
+  
+  
+```
+
+#2) Returned
+
+```{r Retornados, include=FALSE}
+retornados <- read.csv("data/deportados/retornados.csv")
+
+highchart() %>% hc_add_theme(hc_theme_smpl())%>%
+  
+  hc_xAxis(categories = retornados$month) %>% 
+  hc_add_series(data = retornados$retornados,
+                name = "Total Deported/Returned") %>%
+
+  hc_chart(type = "line") %>% 
+  
+  hc_title(text = "Monthly Deportations of Hondurans",
+           style = list(color = "#2d323a", fontSize = "27px", 
+                        fontFamily = "Franklin Gothic Medium Cond", style = "bold")) %>%
+  hc_subtitle(text = "Source: Honduras Ministry of Foreign Affairs.", 
+              style = list(color = "#525c6b", fontSize = "17px", 
+                           fontFamily = "Times New Roman", style = "bold")) %>%
+  hc_tooltip(animation = TRUE,
+             followPointer = FALSE,
+             headerFormat = '<span style="font-size: 14px">{point.key}</span><br/>', 
+             shared = TRUE)
+  
+
+```
+
+#3) Electronic Travel Documents Issued
+
+```{r ETD's}
+
+
+etd <- read.csv("graficos/immigration/etdsmonthly.csv", stringsAsFactors = FALSE)
+
+highchart() %>% hc_add_theme(hc_theme_smpl())%>%
+  
+  hc_xAxis(categories = etd$month) %>% 
+  hc_add_series(data = etd$count,
+                name = "Total ETD's Issed") %>%
+
+  hc_chart(type = "line") %>% 
+  
+  hc_title(text = "ETD's Issued By Month",
+           style = list(color = "#2d323a", fontSize = "27px", 
+                        fontFamily = "Franklin Gothic Medium Cond", style = "bold")) %>%
+  hc_subtitle(text = "ICE ETD Platform", 
+              style = list(color = "#525c6b", fontSize = "17px", 
+                           fontFamily = "Times New Roman", style = "bold")) %>%
+  hc_tooltip(animation = TRUE,
+             followPointer = FALSE,
+             headerFormat = '<span style="font-size: 14px">{point.key}</span><br/>', 
+             shared = TRUE)
+
+
+  
+```
+
+#4) Homicides
+
+```{r Homicides}
+
+homicidios <- read.csv("graficos/security/homicidios.csv", stringsAsFactors = FALSE)
+
+highchart() %>% hc_add_theme(hc_theme_smpl())%>%
+  
+  hc_xAxis(categories = homicidios$month) %>% 
+  hc_add_series(data = homicidios$homicidios,
+                name = "Homicides") %>%
+
+  hc_chart(type = "line") %>% 
+  
+  hc_title(text = "Number of Homicides per Month",
+           style = list(color = "#2d323a", fontSize = "27px", 
+                        fontFamily = "Franklin Gothic Medium Cond", style = "bold")) %>%
+  hc_subtitle(text = "Source: Honduran Ministry of Security", 
+              style = list(color = "#525c6b", fontSize = "17px", 
+                           fontFamily = "Times New Roman", style = "bold")) %>%
+  hc_tooltip(animation = TRUE,
+             followPointer = FALSE,
+             headerFormat = '<span style="font-size: 14px">{point.key}</span><br/>', 
+             shared = TRUE)
+
+
+  
+  
+```
+
+# 5) Real GDP Growth
+
+```{r}
+
+gdp <- read.csv("graficos/economy/gdp.csv", stringsAsFactors = FALSE)
+
+highchart() %>% hc_add_theme(hc_theme_smpl())%>%
+  
+  hc_xAxis(categories = gdp$year) %>% 
+  hc_add_series(data = gdp$gdp,
+                name = "GDP Growth") %>%
+
+  hc_chart(type = "line") %>% 
+  
+  hc_title(text = "Real GDP Growth",
+           style = list(color = "#2d323a", fontSize = "27px", 
+                        fontFamily = "Franklin Gothic Medium Cond", style = "bold")) %>%
+  hc_subtitle(text = "Source: World Bank/IMF", 
+              style = list(color = "#525c6b", fontSize = "17px", 
+                           fontFamily = "Times New Roman", style = "bold")) %>%
+  hc_tooltip(animation = TRUE,
+             followPointer = FALSE,
+             headerFormat = '<span style="font-size: 14px">{point.key}</span><br/>', 
+             valueSuffix = "%",
+             shared = TRUE)
+```
+
+# 6) Remittances as a percentage of GDP
+
+```{r}
+
+gdprem <- read.csv("graficos/economy/gdprem.csv", stringsAsFactors = FALSE)
+
+highchart() %>% hc_add_theme(hc_theme_smpl())%>%
+  
+  hc_xAxis(categories = gdprem$year) %>% 
+  hc_add_series(data = gdprem$remgdp * 100,
+                name = "Remmitances as % of GDP") %>%
+
+  hc_chart(type = "line") %>% 
+  
+  hc_title(text = "Remmitances as a percent of GDP",
+           style = list(color = "#2d323a", fontSize = "27px", 
+                        fontFamily = "Franklin Gothic Medium Cond", style = "bold")) %>%
+  hc_subtitle(text = "Source: Honduran Central Bank", 
+              style = list(color = "#525c6b", fontSize = "17px", 
+                           fontFamily = "Times New Roman", style = "bold")) %>%
+  hc_tooltip(animation = TRUE,
+             followPointer = FALSE,
+             headerFormat = '<span style="font-size: 14px">{point.key}</span><br/>', 
+             shared = TRUE)
+
+```
+
+# 7) 
+
+
+
+
+
+
+
+
+
+
+
+
