@@ -47,7 +47,7 @@ highchart() %>% hc_add_theme(hc_theme_smpl())%>%
   
 ```
 
-#2) Returned
+#2) Returned <- AQUI HAY QUE HACER LA ACLARACION QUE ESTO ES DE TODOS LADOS NO SOLO DE LA USA Y HAY QUE VER SI EN EL OBSERVATORIO PODEMOS CONSEGUIR INFORMACION ESPECIFICAMENTE SOLO DE ORIGEN GRINGO.
 
 ```{r Retornados, include=FALSE}
 retornados <- read.csv("data/deportados/retornados.csv")
@@ -188,8 +188,46 @@ highchart() %>% hc_add_theme(hc_theme_smpl())%>%
 
 ```
 
-#7) 
+#7) Trade Balance
 
+```{r}
+
+trade <- read.csv("graficos/economy/gdprem.csv", stringsAsFactors = FALSE)
+
+highchart() %>% hc_add_theme(hc_theme_smpl())%>%
+  
+  hc_xAxis(categories = trade$year) %>% 
+  hc_add_series(data = round(trade$imports/1000, 1),
+                name = "Total Imports") %>%
+  hc_add_series(data = round(trade$exports/1000, 1),
+                name = "Total Exports") %>%
+    hc_add_series(data = round((trade$imports - trade$exports)/1000, 1),
+                name = "Trade Deficit", color = "lightgray") %>%
+  
+  hc_chart(type = "line") %>% 
+  
+  hc_title(text = "Honduras Trade Balance (in billions of USD)",
+           style = list(color = "#2d323a", fontSize = "27px", 
+                        fontFamily = "Franklin Gothic Medium Cond", style = "bold")) %>%
+  hc_subtitle(text = "Source: Honduras Central Bank", 
+              style = list(color = "#525c6b", fontSize = "17px", 
+                           fontFamily = "Times New Roman", style = "bold")) %>%
+  hc_tooltip(animation = TRUE,
+             followPointer = FALSE,
+             headerFormat = '<span style="font-size: 14px">{point.key}</span><br/>', 
+             shared = TRUE, split = TRUE, 
+             valuePrefix = "$", valueSuffix = " billion")
+```
+
+
+#8 FDI as a percentage of GDP
+
+```{r}
+
+fdi <- read.csv("graficos/economy/gdprem.csv", stringsAsFactors = FALSE)
+
+
+```
 
 
 
