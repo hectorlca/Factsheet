@@ -134,7 +134,42 @@ highchart() %>% hc_add_theme(hc_theme_smpl())%>%
   
 ```
 
-#5) Real GDP Growth
+#5) Extortion
+
+```{r}
+
+extortion <- read.csv("graficos/security/extortion.csv", stringsAsFactors = FALSE)
+
+highchart() %>% hc_add_theme(hc_theme_smpl())%>%
+  
+  hc_xAxis(categories = extortion$year) %>% 
+  hc_add_series(data = extortion$complaints,
+                name = "Cases received") %>%
+  hc_add_series(data = extortion$arrested,
+                name = "Arrests made") %>%
+  hc_add_series(data = extortion$advisories,
+                name = "Consultations given") %>%
+
+  hc_chart(type = "line") %>% 
+  
+  hc_title(text = "Extortion Statistics",
+           style = list(color = "#2d323a", fontSize = "27px", 
+                        fontFamily = "Franklin Gothic Medium Cond", style = "bold")) %>%
+  hc_subtitle(text = "Source: National Anti-extortion Force", 
+              style = list(color = "#525c6b", fontSize = "17px", 
+                           fontFamily = "Times New Roman", style = "bold")) %>%
+  hc_tooltip(animation = TRUE,
+             followPointer = FALSE,
+             headerFormat = '<span style="font-size: 14px">{point.key}</span><br/>', 
+             shared = TRUE)
+
+
+
+
+```
+
+
+#6) Real GDP Growth
 
 ```{r}
 
@@ -161,7 +196,7 @@ highchart() %>% hc_add_theme(hc_theme_smpl())%>%
              shared = TRUE)
 ```
 
-#6) Remittances as a percentage of GDP
+#7) Remittances as a percentage of GDP
 
 ```{r}
 
@@ -188,7 +223,7 @@ highchart() %>% hc_add_theme(hc_theme_smpl())%>%
 
 ```
 
-#7) Trade Balance
+#8) Trade Balance
 
 ```{r}
 
@@ -201,7 +236,7 @@ highchart() %>% hc_add_theme(hc_theme_smpl())%>%
                 name = "Total Imports") %>%
   hc_add_series(data = round(trade$exports/1000, 1),
                 name = "Total Exports") %>%
-    hc_add_series(data = round((trade$imports - trade$exports)/1000, 1),
+  hc_add_series(data = round((trade$imports - trade$exports)/1000, 1),
                 name = "Trade Deficit", color = "lightgray") %>%
   
   hc_chart(type = "line") %>% 
@@ -220,13 +255,32 @@ highchart() %>% hc_add_theme(hc_theme_smpl())%>%
 ```
 
 
-#8 FDI as a percentage of GDP
+#9 FDI as a percentage of GDP
 
 ```{r}
 
 fdi <- read.csv("graficos/economy/gdprem.csv", stringsAsFactors = FALSE)
 
+fdi$fdigdp <- round(fdi$fdi/fdi$gdp*100, 1)
 
+highchart() %>% hc_add_theme(hc_theme_smpl())%>%
+  
+  hc_xAxis(categories = fdi$year) %>% 
+  hc_add_series(data = fdi$fdigdp,
+                name = "FDI as % of GDP") %>%
+
+  hc_chart(type = "line") %>% 
+  
+  hc_title(text = "Foreign Direct Investment as a percent of GDP",
+           style = list(color = "#2d323a", fontSize = "27px", 
+                        fontFamily = "Franklin Gothic Medium Cond", style = "bold")) %>%
+  hc_subtitle(text = "Source: Honduran Central Bank", 
+              style = list(color = "#525c6b", fontSize = "17px", 
+                           fontFamily = "Times New Roman", style = "bold")) %>%
+  hc_tooltip(animation = TRUE,
+             followPointer = FALSE,
+             headerFormat = '<span style="font-size: 14px">{point.key}</span><br/>', 
+             shared = TRUE)
 ```
 
 
