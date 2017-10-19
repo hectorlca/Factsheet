@@ -47,7 +47,7 @@ highchart() %>% hc_add_theme(hc_theme_smpl())%>%
   
 ```
 
-#2) Returned <- AQUI HAY QUE HACER LA ACLARACION QUE ESTO ES DE TODOS LADOS NO SOLO DE LA USA Y HAY QUE VER SI EN EL OBSERVATORIO PODEMOS CONSEGUIR INFORMACION ESPECIFICAMENTE SOLO DE ORIGEN GRINGO.
+#2) Returned from US and Mexico
 
 ```{r Retornados, include=FALSE}
 retornados <- read.csv("data/deportados/retornados.csv")
@@ -55,12 +55,16 @@ retornados <- read.csv("data/deportados/retornados.csv")
 highchart() %>% hc_add_theme(hc_theme_smpl())%>%
   
   hc_xAxis(categories = retornados$month) %>% 
-  hc_add_series(data = retornados$retornados,
-                name = "Total Deported/Returned") %>%
+    hc_add_series(data = retornados$totalretornados,
+                name = "Total Returnees", fillOpacity = 0.3) %>%
+  hc_add_series(data = retornados$retornadosmex,
+                name = "Returnees from Mexico and CA", fillOpacity = 0.5) %>%
+  hc_add_series(data = retornados$retornadosus,
+                name = "Returnees from US", fillOpacity = 0.7) %>%
 
-  hc_chart(type = "line") %>% 
+  hc_chart(type = "area") %>% 
   
-  hc_title(text = "Monthly Deportations of Hondurans",
+  hc_title(text = "Honduran Returnees",
            style = list(color = "#2d323a", fontSize = "27px", 
                         fontFamily = "Franklin Gothic Medium Cond", style = "bold")) %>%
   hc_subtitle(text = "Source: Honduras Ministry of Foreign Affairs.", 
