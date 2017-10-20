@@ -183,7 +183,7 @@ server <- function(input, output, session) {
         animation = TRUE,
         followPointer = FALSE,
         headerFormat = '<span style="font-size: 14px">{point.key}</span><br/>',
-        shared = TRUE
+        shared = FALSE
       )
     
   })
@@ -308,7 +308,7 @@ server <- function(input, output, session) {
         followPointer = FALSE,
         headerFormat = '<span style="font-size: 14px">{point.key}</span><br/>',
         valueSuffix = "%",
-        shared = TRUE
+        shared = TRUE, split = TRUE
       )
   })
   
@@ -331,7 +331,7 @@ server <- function(input, output, session) {
       hc_tooltip(animation = TRUE,
                  followPointer = FALSE,
                  headerFormat = '<span style="font-size: 14px">{point.key}</span><br/>', 
-                 shared = TRUE)
+                 shared = TRUE, split = TRUE)
     
   })
   
@@ -382,7 +382,7 @@ server <- function(input, output, session) {
       hc_tooltip(animation = TRUE,
                  followPointer = FALSE,
                  headerFormat = '<span style="font-size: 14px">{point.key}</span><br/>', 
-                 shared = TRUE)
+                 shared = TRUE, split = TRUE)
   })
   
   
