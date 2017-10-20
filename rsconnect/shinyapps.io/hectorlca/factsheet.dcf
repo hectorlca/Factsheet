@@ -1,0 +1,13 @@
+name: factsheet
+title: factsheet
+username:
+account: hectorlca
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 227299
+bundleId: 1036693
+url: https://hectorlca.shinyapps.io/factsheet/
+when: 1508512043.54353
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: All Shiny Graphs.Rmd|README.md|cleanup scripts/aprehensiones.R|cleanup scripts/Deportados.R|cleanup scripts/etd.R|cleanup scripts/Retornados.R|cleanup scripts/Seguridad.R|data/deportados/comparativouacfy.csv|data/deportados/deportados.csv|data/limpia/depsclean.csv|data/limpia/depsdailywithmonth.csv|data/limpia/resumenetd.csv|graficos/economy/HLC.xls|graficos/economy/imae.csv|graficos/economy/monthlies.csv|graficos/immigration/uac.xlsx|graficos/security/~$Estadisticas FNA Por Rubro 21-08-2017.pptx|graficos/security/Estadisticas FNA Por Rubro 21-08-2017.pptx
