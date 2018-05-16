@@ -156,7 +156,8 @@ server <- function(input, output, session) {
     highchart() %>% hc_add_theme(hc_theme_smpl()) %>%
       
       hc_xAxis(categories = aprehensiones$month) %>%
-      hc_add_series(data = aprehensiones$total,
+      hc_add_series(data = aprehensiones$total, 
+                    dataLabels = list(enabled = TRUE),
                     name = "Total Apprehended") %>%
       hc_add_series(data = aprehensiones$menores,
                     name = "Minors Apprehended") %>%
@@ -184,7 +185,8 @@ server <- function(input, output, session) {
         followPointer = FALSE,
         headerFormat = '<span style="font-size: 14px">{point.key}</span><br/>',
         shared = FALSE
-      )
+      ) %>%
+      hc_rangeSelector()
     
   })
   
