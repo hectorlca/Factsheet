@@ -156,6 +156,30 @@ deportados$consulado <-
   ifelse(deportados$issuedby == "dfuentes", 
          yes = "Chicago", no = deportados$consulado)
 
+deportados$consulado <-
+  ifelse(deportados$issuedby == "awilliams", 
+         yes = "Atlanta", no = deportados$consulado)
+
+deportados$consulado <-
+  ifelse(deportados$issuedby == "evega", 
+         yes = "Centro de Proteccion Houston", no = deportados$consulado)
+
+deportados$consulado <-
+  ifelse(deportados$issuedby == "echavez", 
+         yes = "Seattle", no = deportados$consulado)
+
+deportados$consulado <-
+  ifelse(deportados$issuedby == "galvarado", 
+         yes = "Dallas", no = deportados$consulado)
+
+deportados$consulado <-
+  ifelse(deportados$issuedby == "jcaraccioli", 
+         yes = "New Orleans", no = deportados$consulado)
+
+deportados$consulado <-
+  ifelse(deportados$issuedby == "jcastro", 
+         yes = "Washington, D.C.", no = deportados$consulado)
+
 
 ### Limpiar Lugar de Detencion
 
@@ -345,28 +369,16 @@ depsdailysum <-
 write.csv(depsdailysum, "graficos/immigration/etdsmonthyl.csv", row.names = FALSE)
 #depsdaily$date <- paste0("1/", depsdaily$issuemonth, "/", depsdaily$issueyear)
 
-depsxts <- ungroup(depsdaily)
-depsxts <- select(depsdaily, date, count)
 
-
-
-
-depsxts$date2 <- mdy(depsxts$date)
-depsxts$date3 <- dmy(depsxts$date)
 
 
 write.csv(depsxts, "data/deportados/etd.csv", row.names = FALSE)
 
-###############################################################
-### AQUI TERMINA LA LIMPIEZA Y SE GUARDA EL ARCHIVO RESUMEN###
-##############################################################
-#### el Dygraph ###
-
-dygraph(depsxts)
+#####
   
 
 
-
+deportados$issueddate <- dmy(as.character(deportados$issueddate))
 
 
 
